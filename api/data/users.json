@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "email": "mat@gmail.com",
+      "hash": "$2a$10$RVAd3nqwK0DN5Lv7E57v7ORWqGF7A8P/P4j0JIbEHb1sS8fJfBcMu",
+      "role": "USER",
+      "id": "cd7e1ca0-4379-4152-b451-7189c1efc87c",
+      "favorites": [
+        "79874"
+      ]
+    },
+    {
+      "email": "admin@globomantics.com",
+      "hash": "$2a$10$7bLV5PLjd4CDjQJqmkgDEuLlzXNsprI561a0Btk.h9YeKfsvqiahq",
+      "role": "ADMIN",
+      "id": "c22e95c6-e111-4655-b54a-8b12392e312e"
+    }
+  ]
+}
