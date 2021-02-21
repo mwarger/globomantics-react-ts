@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-export function HeroLinkButton({ to, children }) {
+export function HeroLinkButton({ to, label }) {
   return (
     <Link
       style={{
@@ -16,7 +16,7 @@ export function HeroLinkButton({ to, children }) {
       }}
       to={to}
     >
-      {children.toLowerCase()}
+      {label.toLowerCase()}
     </Link>
   );
 }

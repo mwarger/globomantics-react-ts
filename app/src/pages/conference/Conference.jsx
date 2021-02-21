@@ -5,7 +5,6 @@ import { Sessions } from "./sessions/Sessions";
 import { Session } from "./sessions/Session";
 import "./style-sessions.css";
 import { Speakers, Speaker } from "./Speakers";
-import ErrorBoundary from "./ErrorBoundary";
 import { AboutUs } from "./AboutUs";
 import { Navigation } from "./Navigation";
 
@@ -14,31 +13,29 @@ export function Conference() {
 
   return (
     <>
-      <ErrorBoundary>
-        <Switch>
-          <Route path={`${path}/sessions/new`}>
-            <AddSession />
-          </Route>
-          <Route path={`${path}/sessions/:session_id`}>
-            <Session />
-          </Route>
-          <Route path={`${path}/speakers/:speaker_id`}>
-            <Speaker />
-          </Route>
-          <Route path={`${path}/speakers`}>
-            <Speakers />
-          </Route>
-          <Route path={`${path}/sessions`}>
-            <Sessions />
-          </Route>
-          <Route path={`${path}/about`}>
-            <AboutUs />
-          </Route>
-          <Route path={`${path}`}>
-            <Navigation />
-          </Route>
-        </Switch>
-      </ErrorBoundary>
+      <Switch>
+        <Route path={`${path}/sessions/new`}>
+          <AddSession />
+        </Route>
+        <Route path={`${path}/sessions/:session_id`}>
+          <Session />
+        </Route>
+        <Route path={`${path}/speakers/:speaker_id`}>
+          <Speaker />
+        </Route>
+        <Route path={`${path}/speakers`}>
+          <Speakers />
+        </Route>
+        <Route path={`${path}/sessions`}>
+          <Sessions />
+        </Route>
+        <Route path={`${path}/about`}>
+          <AboutUs />
+        </Route>
+        <Route path={`${path}`}>
+          <Navigation />
+        </Route>
+      </Switch>
     </>
   );
 }
