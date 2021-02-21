@@ -10,13 +10,13 @@ export function HeroLinkButton({ to, children }) {
         borderRadius: 20,
         margin: 20,
         padding: 20,
-        display: "flex",
-        justifyContent: "center",
+        textAlign: "center",
         backgroundColor: "#0D1424",
+        textTransform: "capitalize",
       }}
       to={to}
     >
-      {children}
+      {children.toLowerCase()}
     </Link>
   );
 }

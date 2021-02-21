@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useRouteMatch, Link } from "react-router-dom";
-import { HeroLinkButton } from "./HeroLinkButton";
 
 export function Navigation() {
   const { url } = useRouteMatch();
@@ -8,9 +7,17 @@ export function Navigation() {
   return (
     <section className="banner">
       <img src="images/banner3.png" alt="" />
-      <div className="inner-content col-md-12">
+      <div className="col-md-12" style={{ position: "absolute", top: 50 }}>
         <div className="container jumboContainer">
-          <div className="col-md-8 middle">
+          <div
+            className="col-md-8 middle"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignContent: "center",
+              justifyContent: "center",
+            }}
+          >
             <Link
               style={{
                 fontSize: 56,
@@ -18,13 +25,12 @@ export function Navigation() {
                 borderRadius: 20,
                 margin: 20,
                 padding: 20,
-                display: "flex",
-                justifyContent: "center",
+                textAlign: "center",
                 backgroundColor: "#0D1424",
+                textTransform: "capitalize",
               }}
-              to={`${url}/speakers`}
             >
-              View Speakers
+              View speakers
             </Link>
             <Link
               style={{
@@ -33,9 +39,9 @@ export function Navigation() {
                 borderRadius: 20,
                 margin: 20,
                 padding: 20,
-                display: "flex",
-                justifyContent: "center",
+                textAlign: "center",
                 backgroundColor: "#0D1424",
+                textTransform: "capitalize",
               }}
               to={`${url}/sessions`}
             >
@@ -48,13 +54,13 @@ export function Navigation() {
                 borderRadius: 20,
                 margin: 20,
                 padding: 20,
-                display: "flex",
-                justifyContent: "center",
+                textAlign: "center",
                 backgroundColor: "#0D1424",
+                textTransform: "capitalize",
               }}
               to={`${url}/about`}
             >
-              About Our Conference
+              about us
             </Link>
           </div>
         </div>

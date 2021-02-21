@@ -24,17 +24,17 @@ export function SessionItem({ session }) {
     await toggle();
   };
 
-  const { id, title, day, room, level, favorite, speakers = [] } = session;
+  const { ID, title, day, room, level, favorite, speakers = [] } = session;
   return (
-    <div key={id} className="col-xs-12 col-sm-6" style={{ padding: 5 }}>
+    <div key={ID} className="col-xs-12 col-sm-6" style={{ padding: 5 }}>
       <div className="panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title">{title}</h3>
         </div>
         <div className="panel-body">
           <h5>{`Day: ${day}`}</h5>
-          <h5>{`Room Number: ${room}`}</h5>
-          <h5>{`Level: ${level}`}</h5>
+          {room ? <h5>{`Room Number: ${room}`}</h5> : null}
+          {level ? <h5>{`Level: ${level}`}</h5> : null}
         </div>
         <div className="panel-footer">
           {isAuthenticated && (
@@ -55,13 +55,13 @@ export function SessionItem({ session }) {
               </button>
             </span>
           )}
-          {speakers.map(({ id, name }) => (
-            <span key={id} style={{ padding: 2 }}>
+          {speakers.map(({ ID, full_name }) => (
+            <span key={ID} style={{ padding: 2 }}>
               <Link
                 className="btn btn-default btn-lg"
-                to={`/conference/speakers/${id}`}
+                to={`/conference/speakers/${ID}`}
               >
-                View {name}'s Profile
+                View {full_name}'s Profile
               </Link>
             </span>
           ))}

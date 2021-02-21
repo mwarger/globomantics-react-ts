@@ -35,9 +35,6 @@ export function SessionDetails() {
   if (error) return <p>Error :(</p>;
 
   const session = data.sessionById;
-  if (!session) {
-    return <div>No session.</div>;
-  }
 
   return (
     <SessionItem

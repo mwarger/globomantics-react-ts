@@ -1,5 +1,6 @@
 {
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.annotations.changes": false,
-    "gitlens.hovers.annotations.details": false
+    "gitlens.hovers.annotations.details": false,
+    "gitlens.codeLens.enabled": false
 }
