@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRouteMatch, Link } from "react-router-dom";
 
-function NavigationLink(props) {
+function NavigationLink(props: { to: string; label: string }) {
   return (
     <Link
       style={{
@@ -38,13 +38,9 @@ export function Navigation() {
               justifyContent: "center",
             }}
           >
-            <NavigationLink label="View speakers"></NavigationLink>
-            <NavigationLink to={`${url}/sessions`}>
-              View sessions
-            </NavigationLink>
-            <NavigationLink to={`${url}/about`} lable="About us">
-              About us
-            </NavigationLink>
+            <NavigationLink to={`${url}/speakers`} label="View Speakers" />
+            <NavigationLink to={`${url}/sessions`} label="View sessions" />
+            <NavigationLink to={`${url}/about`} label="About us" />
           </div>
         </div>
       </div>
