@@ -7,12 +7,13 @@ import "./style-sessions.css";
 import { Speakers, Speaker } from "./Speakers";
 import { AboutUs } from "./AboutUs";
 import { Navigation } from "./Navigation";
+import ErrorBoundary from "./ErrorBoundary";
 
 export function Conference() {
   const { path } = useRouteMatch();
 
   return (
-    <>
+    <ErrorBoundary>
       <Switch>
         <Route path={`${path}/sessions/new`}>
           <AddSession />
@@ -36,6 +37,6 @@ export function Conference() {
           <Navigation />
         </Route>
       </Switch>
-    </>
+    </ErrorBoundary>
   );
 }

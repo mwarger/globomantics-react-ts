@@ -1,6 +1,26 @@
 import * as React from "react";
 import { useRouteMatch, Link } from "react-router-dom";
 
+function NavigationLink(props) {
+  return (
+    <Link
+      style={{
+        fontSize: 56,
+        border: "solid 1px white",
+        borderRadius: 20,
+        margin: 20,
+        padding: 20,
+        textAlign: "center",
+        backgroundColor: "#0D1424",
+        textTransform: "capitalize",
+      }}
+      to={props.to}
+    >
+      {props.label.toLowerCase()}
+    </Link>
+  );
+}
+
 export function Navigation() {
   const { url } = useRouteMatch();
 
@@ -18,50 +38,13 @@ export function Navigation() {
               justifyContent: "center",
             }}
           >
-            <Link
-              style={{
-                fontSize: 56,
-                border: "solid 1px white",
-                borderRadius: 20,
-                margin: 20,
-                padding: 20,
-                textAlign: "center",
-                backgroundColor: "#0D1424",
-                textTransform: "capitalize",
-              }}
-            >
-              View speakers
-            </Link>
-            <Link
-              style={{
-                fontSize: 56,
-                border: "solid 1px white",
-                borderRadius: 20,
-                margin: 20,
-                padding: 20,
-                textAlign: "center",
-                backgroundColor: "#0D1424",
-                textTransform: "capitalize",
-              }}
-              to={`${url}/sessions`}
-            >
-              View Sessions
-            </Link>
-            <Link
-              style={{
-                fontSize: 56,
-                border: "solid 1px white",
-                borderRadius: 20,
-                margin: 20,
-                padding: 20,
-                textAlign: "center",
-                backgroundColor: "#0D1424",
-                textTransform: "capitalize",
-              }}
-              to={`${url}/about`}
-            >
-              about us
-            </Link>
+            <NavigationLink label="View speakers"></NavigationLink>
+            <NavigationLink to={`${url}/sessions`}>
+              View sessions
+            </NavigationLink>
+            <NavigationLink to={`${url}/about`} lable="About us">
+              About us
+            </NavigationLink>
           </div>
         </div>
       </div>
