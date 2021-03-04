@@ -16,6 +16,7 @@ import { useAppInit } from "./useAppInit";
 
 function AppRouter() {
   const { loading } = useAppInit();
+
   return (
     <div id="wrapper">
       <Router>
