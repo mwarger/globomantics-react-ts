@@ -29,13 +29,15 @@ export function SessionDetails() {
 
   const favorites = data.user?.favorites ?? [];
 
-  const favorite = favorites.map(favorite => favorite.id).includes(session.id);
+  const isFavorite = favorites
+    ?.map(favorite => favorite.id)
+    .includes(session.id);
 
   return (
     <SessionItem
       session={{
         ...session,
-        favorite,
+        favorite: isFavorite,
       }}
     />
   );
