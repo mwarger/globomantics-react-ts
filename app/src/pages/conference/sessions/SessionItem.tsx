@@ -60,23 +60,27 @@ export function SessionItem({
               </button>
             </span>
           )}
-          {speakers?.map(speaker => {
-            if (!speaker) {
-              return null;
-            }
+          {speakers ? (
+            speakers.map(speaker => {
+              if (!speaker) {
+                return null;
+              }
 
-            const { id, name } = speaker;
-            return (
-              <span key={id} style={{ padding: 2 }}>
-                <Link
-                  className="btn btn-default btn-lg"
-                  to={`/conference/speakers/${id}`}
-                >
-                  View {name}'s Profile
-                </Link>
-              </span>
-            );
-          })}
+              const { id, name } = speaker;
+              return (
+                <span key={id} style={{ padding: 2 }}>
+                  <Link
+                    className="btn btn-default btn-lg"
+                    to={`/conference/speakers/${id}`}
+                  >
+                    View {name}'s Profile
+                  </Link>
+                </span>
+              );
+            })
+          ) : (
+            <div>No speakers for this session.</div>
+          )}
         </div>
       </div>
     </div>
