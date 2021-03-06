@@ -28,7 +28,7 @@ export function SessionForm() {
   const history = useHistory();
   const [create] = useMutation(CREATE_SESSION);
 
-  const initialState = {
+  const initialState: State = {
     title: "",
     description: "",
     format: "",
@@ -39,6 +39,7 @@ export function SessionForm() {
     switch (action.type) {
       case "onChange":
         return { ...state, [action.payload.name]: action.payload.value };
+      // onBlur
       default:
         return state;
     }
