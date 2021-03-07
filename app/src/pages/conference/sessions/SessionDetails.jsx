@@ -1,29 +1,8 @@
 import * as React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { SessionItem } from "./SessionItem";
-
-export const SESSION_BY_ID = gql`
-  query sessionById($id: ID!) {
-    sessionById(id: $id) {
-      id
-      title
-      day
-      room
-      level
-      speakers {
-        id
-        name
-      }
-    }
-    user: me {
-      id
-      favorites {
-        id
-      }
-    }
-  }
-`;
+import { SESSION_BY_ID } from "./SESSION_BY_ID";
 
 export function SessionDetails() {
   const { session_id } = useParams();
