@@ -11,7 +11,7 @@ interface AuthInfo {
 interface AuthContextType {
   isAdmin: boolean;
   isAuthenticated: boolean;
-  setAuthInfo: React.Dispatch<React.SetStateAction<AuthInfo>>;
+  setAuthInfo: (authInfo: AuthInfo) => void;
   authInfo: AuthInfo;
 }
 
@@ -29,8 +29,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const isAdmin = authInfo.userData?.role === "ADMIN";
 
+  function handleAuthInfo(authInfo: AuthInfo) {
+    setAuthInfo(authInfo);
+  }
+
   return (
-    <Provider value={{ authInfo, isAuthenticated, setAuthInfo, isAdmin }}>
+    <Provider
+      value={{
+        authInfo,
+        isAuthenticated,
+        setAuthInfo: handleAuthInfo,
+        isAdmin,
+      }}
+    >
       {children}
     </Provider>
   );
