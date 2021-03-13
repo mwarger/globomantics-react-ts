@@ -33,6 +33,9 @@ export function SessionForm() {
         }}
         onSubmit={async values => {
           await create({ variables: { session: values } });
+          setTimeout(() => {
+            history.push("/conference/sessions");
+          }, 2000);
         }}
       >
         {() => (
