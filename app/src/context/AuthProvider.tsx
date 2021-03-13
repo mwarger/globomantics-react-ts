@@ -1,11 +1,9 @@
 import React from "react";
 
-interface UserData {
-  role: "ADMIN" | "USER";
-}
-
 interface AuthInfo {
-  userData: UserData | null;
+  userData: {
+    role: "ADMIN" | "USER";
+  };
 }
 
 interface AuthContextType {
@@ -22,7 +20,9 @@ const Provider = AuthContext.Provider;
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [authInfo, setAuthInfo] = React.useState<AuthInfo>({
-    userData: null,
+    userData: {
+      role: "USER",
+    },
   });
 
   const isAuthenticated = authInfo.userData !== null;
