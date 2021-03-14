@@ -51,42 +51,42 @@ export interface createSessionVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: sessionById
+// GraphQL query operation: sessionInfo
 // ====================================================
 
-export interface sessionById_sessionById_speakers {
+export interface sessionInfo_sessionById_speakers {
   __typename: "Speaker";
   id: string;
   name: string | null;
 }
 
-export interface sessionById_sessionById {
+export interface sessionInfo_sessionById {
   __typename: "Session";
   id: string;
   title: string;
   day: string | null;
   room: string | null;
   level: string | null;
-  speakers: (sessionById_sessionById_speakers | null)[] | null;
+  speakers: (sessionInfo_sessionById_speakers | null)[] | null;
 }
 
-export interface sessionById_user_favorites {
+export interface sessionInfo_user_favorites {
   __typename: "Session";
   id: string;
 }
 
-export interface sessionById_user {
+export interface sessionInfo_user {
   __typename: "User";
   id: string;
-  favorites: sessionById_user_favorites[] | null;
+  favorites: sessionInfo_user_favorites[] | null;
 }
 
-export interface sessionById {
-  sessionById: sessionById_sessionById | null;
-  user: sessionById_user | null;
+export interface sessionInfo {
+  sessionById: sessionInfo_sessionById | null;
+  user: sessionInfo_user | null;
 }
 
-export interface sessionByIdVariables {
+export interface sessionInfoVariables {
   id: string;
 }
 

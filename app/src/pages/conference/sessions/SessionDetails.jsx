@@ -8,6 +8,7 @@ function useSessionData(id) {
   const [result, setResult] = React.useState();
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
+
   React.useEffect(() => {
     function getData() {
       setLoading(true);
@@ -19,7 +20,7 @@ function useSessionData(id) {
         method: "POST",
         credentials: "same-origin",
         body: JSON.stringify({
-          query: `query sessionById($id: ID!) {
+          query: `query sessionInfo($id: ID!) {
           sessionById(id: $id) {
             id
             title
@@ -45,6 +46,7 @@ function useSessionData(id) {
           return data.json();
         })
         .then(result => {
+          console.log("result", result.data);
           setResult(result.data);
         })
         .catch(err => {

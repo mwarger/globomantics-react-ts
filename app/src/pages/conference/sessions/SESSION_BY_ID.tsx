@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const SESSION_BY_ID = gql`
-  query sessionById($id: ID!) {
+  query sessionInfo($id: ID!) {
     sessionById(id: $id) {
       id
       title
