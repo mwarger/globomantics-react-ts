@@ -7,7 +7,7 @@
     "app": "cd app && npm run start",
     "api": "cd api && npm run start",
     "start": "run-p app api",
-    "codegen": "apollo client:codegen app/graphql-types.ts --endpoint http://localhost:4000/graphql --target typescript --includes=app/**/*.tsx --outputFlat"
+    "codegen": "apollo client:codegen app/src/graphql-types.ts --endpoint http://localhost:4000/graphql --target typescript --includes=app/**/*.tsx --outputFlat"
   },
   "keywords": [],
   "author": "",
