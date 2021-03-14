@@ -1,31 +1,41 @@
 import * as React from "react";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { CREATE_SESSION } from "./CREATE_SESSION";
 
-export const CREATE_SESSION = gql`
-  mutation createSession($session: SessionInput) {
-    createSession(session: $session) {
-      id
-      title
+interface State {
+  title: string;
+  description: string;
+  format: string;
+  level: string;
+}
+
+type StateKeys = keyof State;
+
+type Action =
+  | {
+      type: "onChange";
+      payload: { name: StateKeys; value: string };
     }
-  }
-`;
+  | { type: "onBlur" };
 
 export function SessionForm() {
   const history = useHistory();
   const [create] = useMutation(CREATE_SESSION);
 
-  const initialState = {
+  const initialState: State = {
     title: "",
     description: "",
     format: "",
     level: "",
   };
 
-  function formReducer(state, action) {
+  function formReducer(state: State, action: Action) {
     switch (action.type) {
       case "onChange":
         return { ...state, [action.payload.name]: action.payload.value };
+      case "onBlur":
+        return state; // more logic here
       default:
         return state;
     }
@@ -33,24 +43,24 @@ export function SessionForm() {
 
   const [formValues, dispatch] = React.useReducer(formReducer, initialState);
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.currentTarget;
 
     dispatch({
       type: "onChange",
       payload: {
-        name: target.name,
+        name: target.name as StateKeys,
         value: target.value,
       },
     });
   }
 
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   React.useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
-  async function submitForm(e) {
+  async function submitForm(e: React.SyntheticEvent) {
     e.preventDefault();
     await create({ variables: { session: formValues } });
     setTimeout(() => {

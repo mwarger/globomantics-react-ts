@@ -15,7 +15,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import { useAppInit } from "./useAppInit";
 
 function AppRouter() {
-  const { loading } = useAppInit();
+  const [loading] = useAppInit();
   return (
     <div id="wrapper">
       <Router>

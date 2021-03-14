@@ -2,15 +2,7 @@ import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Formik, Form, Field } from "formik";
 import { useHistory } from "react-router-dom";
-
-export const CREATE_SESSION = gql`
-  mutation createSession($session: SessionInput) {
-    createSession(session: $session) {
-      id
-      title
-    }
-  }
-`;
+import { CREATE_SESSION } from "./CREATE_SESSION";
 
 export function SessionForm() {
   const history = useHistory();
