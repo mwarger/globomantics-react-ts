@@ -6,8 +6,8 @@ import { SESSION_BY_ID } from "./SESSION_BY_ID";
 
 function useSessionData(id) {
   const [result, setResult] = React.useState();
-  const [loading, setLoading] = React.useState();
-  const [error, setError] = React.useState();
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
   React.useEffect(() => {
     function getData() {
       setLoading(true);
@@ -42,12 +42,10 @@ function useSessionData(id) {
         }),
       })
         .then(data => {
-          console.log("data", data);
           return data.json();
         })
         .then(result => {
-          console.log("result", result);
-          setResult(result);
+          setResult(result.data);
         })
         .catch(err => {
           setError(err);
@@ -65,10 +63,10 @@ function useSessionData(id) {
 
 export function SessionDetails() {
   const { session_id } = useParams();
-  // const { loading, error, data } = useSessionData(session_id);
-  const { loading, error, data } = useQuery(SESSION_BY_ID, {
-    variables: { id: session_id },
-  });
+  const { loading, error, data } = useSessionData(session_id);
+  // const { loading, error, data } = useQuery(SESSION_BY_ID, {
+  //   variables: { id: session_id },
+  // });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
