@@ -6,12 +6,14 @@
   "scripts": {
     "app": "cd app && npm run start",
     "api": "cd api && npm run start",
-    "start": "run-p app api"
+    "start": "run-p app api",
+    "codegen": "apollo client:codegen app/graphql-types.ts --endpoint http://localhost:4000/graphql --target typescript --includes=app/**/*.tsx --outputFlat"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "apollo": "^2.32.5",
     "npm-run-all": "^4.1.5"
   },
   "dependencies": {
