@@ -3,9 +3,31 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { SessionItem } from "./SessionItem";
 import { SESSION_BY_ID } from "./SESSION_BY_ID";
+import { sessionInfo, sessionInfoVariables } from "../../../graphql-types";
 
-function useSessionData(id) {
-  const [result, setResult] = React.useState();
+function useSessionData(id: string) {
+  const [result, setResult] = React.useState<
+    | undefined
+    | {
+        sessionById: {
+          id: string;
+          title: string;
+          day: string;
+          room: string;
+          level: string;
+          speakers: {
+            id: string;
+            name: string;
+          }[];
+          user: {
+            id: string;
+            favorites: {
+              id: string;
+            }[];
+          };
+        };
+      }
+  >();
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
 
@@ -64,24 +86,34 @@ function useSessionData(id) {
 }
 
 export function SessionDetails() {
-  const { session_id } = useParams();
-  const { loading, error, data } = useSessionData(session_id);
-  // const { loading, error, data } = useQuery(SESSION_BY_ID, {
-  //   variables: { id: session_id },
-  // });
+  const { session_id } = useParams<{ session_id: string }>();
+  // const { loading, error, data } = useSessionData(session_id);
+  const { loading, error, data } = useQuery<sessionInfo, sessionInfoVariables>(
+    SESSION_BY_ID,
+    {
+      variables: { id: session_id },
+    }
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
+  if (data === undefined) {
+    return null;
+  }
+
   const session = data.sessionById;
 
+  if (!session) {
+    return <div>No session found.</div>;
+  }
+
+  const favorites = data.user?.favorites ?? [];
   return (
     <SessionItem
       session={{
         ...session,
-        favorite: data.user?.favorites
-          .map(favorite => favorite.id)
-          .includes(session.id),
+        favorite: favorites.map(favorite => favorite.id).includes(session.id),
       }}
     />
   );

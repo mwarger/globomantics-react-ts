@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../context/AuthProvider";
+import { AuthContext, useAuthContext } from "../../../context/AuthProvider";
+import { sessionInfo_sessionById } from "../../../graphql-types";
 
 export const TOGGLE_FAVORITE = gql`
   mutation ToggleFavorite($sessionId: ID!) {
@@ -14,8 +15,12 @@ export const TOGGLE_FAVORITE = gql`
   }
 `;
 
-export function SessionItem({ session }) {
-  const { isAuthenticated } = React.useContext(AuthContext);
+export function SessionItem({
+  session,
+}: {
+  session: sessionInfo_sessionById & { favorite: boolean };
+}) {
+  const { isAuthenticated } = useAuthContext();
   const [toggle] = useMutation(TOGGLE_FAVORITE, {
     variables: { sessionId: session.id },
   });
@@ -24,9 +29,9 @@ export function SessionItem({ session }) {
     await toggle();
   };
 
-  const { ID, title, day, room, level, favorite, speakers = [] } = session;
+  const { id, title, day, room, level, favorite, speakers = [] } = session;
   return (
-    <div key={ID} className="col-xs-12 col-sm-6" style={{ padding: 5 }}>
+    <div key={id} className="col-xs-12 col-sm-6" style={{ padding: 5 }}>
       <div className="panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title">{title}</h3>
@@ -55,16 +60,23 @@ export function SessionItem({ session }) {
               </button>
             </span>
           )}
-          {speakers.map(({ ID, full_name }) => (
-            <span key={ID} style={{ padding: 2 }}>
-              <Link
-                className="btn btn-default btn-lg"
-                to={`/conference/speakers/${ID}`}
-              >
-                View {full_name}'s Profile
-              </Link>
-            </span>
-          ))}
+          {speakers ? (
+            speakers.map(speaker => {
+              if (!speaker) return null;
+              return (
+                <span key={speaker.id} style={{ padding: 2 }}>
+                  <Link
+                    className="btn btn-default btn-lg"
+                    to={`/conference/speakers/${speaker.id}`}
+                  >
+                    View {speaker.name}'s Profile
+                  </Link>
+                </span>
+              );
+            })
+          ) : (
+            <div>No speakers found.</div>
+          )}
         </div>
       </div>
     </div>
