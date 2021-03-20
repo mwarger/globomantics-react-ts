@@ -2,6 +2,8 @@
 
 > This is the sample application for the Building React Apps with TypeScript course, at Pluralsight.
 
+Note that this course and examples assumes you have familiarity with React to begin with. The TypeScript concepts are introduced gradually. The goal is to provide a streamlined knowledge of the concepts needed to get up and running with TypeScript quickly.
+
 The API is available at /api.
 
 The example app used in the course is available at /app.
