@@ -1,28 +1,23 @@
 import * as React from "react";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { CREATE_SESSION } from "./CREATE_SESSION";
 
-export const CREATE_SESSION = gql`
-  mutation createSession($session: SessionInput) {
-    createSession(session: $session) {
-      id
-      title
-    }
-  }
-`;
-
-type State = {
+interface State {
   title: string;
   description: string;
   format: string;
   level: string;
-};
-type StateKey = keyof State;
+}
 
-type Action = {
-  type: "onChange";
-  payload: { name: StateKey; value: string };
-};
+type StateKeys = keyof State;
+
+type Action =
+  | {
+      type: "onChange";
+      payload: { name: StateKeys; value: string };
+    }
+  | { type: "onBlur" };
 
 export function SessionForm() {
   const history = useHistory();
@@ -35,11 +30,12 @@ export function SessionForm() {
     level: "",
   };
 
-  function formReducer(state: State, action: Action): State {
+  function formReducer(state: State, action: Action) {
     switch (action.type) {
       case "onChange":
         return { ...state, [action.payload.name]: action.payload.value };
-      // onBlur
+      case "onBlur":
+        return state; // more logic here
       default:
         return state;
     }
@@ -53,7 +49,7 @@ export function SessionForm() {
     dispatch({
       type: "onChange",
       payload: {
-        name: target.name as StateKey,
+        name: target.name as StateKeys,
         value: target.value,
       },
     });
@@ -64,7 +60,7 @@ export function SessionForm() {
     inputRef.current?.focus();
   }, []);
 
-  async function submitForm(e: React.FormEvent) {
+  async function submitForm(e: React.SyntheticEvent) {
     e.preventDefault();
     await create({ variables: { session: formValues } });
     setTimeout(() => {

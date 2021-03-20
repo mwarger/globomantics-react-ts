@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { useAuthProvider } from "../../../context/AuthProvider";
-import { sessionById_sessionById } from "../../../../graphql-types";
+import { AuthContext, useAuthContext } from "../../../context/AuthProvider";
+import { sessionInfo_sessionById } from "../../../graphql-types";
 
 export const TOGGLE_FAVORITE = gql`
   mutation ToggleFavorite($sessionId: ID!) {
@@ -18,9 +18,9 @@ export const TOGGLE_FAVORITE = gql`
 export function SessionItem({
   session,
 }: {
-  session: sessionById_sessionById & { favorite: boolean };
+  session: sessionInfo_sessionById & { favorite: boolean };
 }) {
-  const { isAuthenticated } = useAuthProvider();
+  const { isAuthenticated } = useAuthContext();
   const [toggle] = useMutation(TOGGLE_FAVORITE, {
     variables: { sessionId: session.id },
   });
@@ -62,24 +62,20 @@ export function SessionItem({
           )}
           {speakers ? (
             speakers.map(speaker => {
-              if (!speaker) {
-                return null;
-              }
-
-              const { id, name } = speaker;
+              if (!speaker) return null;
               return (
-                <span key={id} style={{ padding: 2 }}>
+                <span key={speaker.id} style={{ padding: 2 }}>
                   <Link
                     className="btn btn-default btn-lg"
-                    to={`/conference/speakers/${id}`}
+                    to={`/conference/speakers/${speaker.id}`}
                   >
-                    View {name}'s Profile
+                    View {speaker.name}'s Profile
                   </Link>
                 </span>
               );
             })
           ) : (
-            <div>No speakers for this session.</div>
+            <div>No speakers found.</div>
           )}
         </div>
       </div>
