@@ -6,7 +6,8 @@
   "scripts": {
     "app": "cd app && npm run start",
     "api": "cd api && npm run start",
-    "start": "run-p app api"
+    "start": "run-p app api",
+    "install-deps": "cd api && yarn install && cd .. && cd app && yarn install && cd .. && yarn"
   },
   "keywords": [],
   "author": "",

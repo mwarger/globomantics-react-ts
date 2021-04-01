@@ -4,9 +4,19 @@
 
 Note that this course and examples assumes you have familiarity with React to begin with. The TypeScript concepts are introduced gradually. The goal is to provide a streamlined knowledge of the concepts needed to get up and running with TypeScript quickly.
 
+## Installation
+
+Run `yarn install-deps` or `npm run install-deps` at the root of the project and it will install all the dependencies.
+
+## Running the app
+
+Run `yarn start` at the root of the project.
+
 The API is available at /api.
 
 The example app used in the course is available at /app.
+
+## Module Layout
 
 For the first module about updating an application to use TypeScript, check out the `main` branch for a default implementation of the app written in javascript. You can use this project (or any javascrit project you have) to start with.
 
